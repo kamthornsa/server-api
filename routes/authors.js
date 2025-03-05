@@ -81,7 +81,7 @@ router.post('/test/:id', (req, res) => {
 })
 
 // แก้ไขข้อมูล
-router.put('/:id', async (req, res) => {
+router.put('/:id', verifyToken, async (req, res) => {
     const { id } = req.params
     const { name, birth_date, nationality} = req.body
 
