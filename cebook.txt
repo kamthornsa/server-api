@@ -1,0 +1,59 @@
+-- สร้างตารางผู้แต่ง (Authors)
+CREATE TABLE authors (
+    author_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    birth_date DATE,
+    nationality VARCHAR(50)
+);
+
+-- สร้างตารางสำนักพิมพ์ (Publishers)
+CREATE TABLE publishers (
+    publisher_id SERIAL PRIMARY KEY,
+    publisher_name VARCHAR(100) NOT NULL
+);
+
+-- สร้างตารางหนังสือ (Books)
+CREATE TABLE books (
+    book_id SERIAL PRIMARY KEY,
+    title VARCHAR(100),
+    price DECIMAL(7,2),
+    genre VARCHAR(100),
+    published DATE,
+    publisher_id INT REFERENCES publishers(publisher_id),
+    author_id INT REFERENCES authors(author_id)
+);
+
+-- เพิ่มข้อมูลตัวอย่างในตาราง authors
+INSERT INTO authors (name, birth_date, nationality) VALUES
+('J.K. Rowling', '1965-07-31', 'British'),
+('George Orwell', '1903-06-25', 'British'),
+('Haruki Murakami', '1949-01-12', 'Japanese');
+
+-- เพิ่มข้อมูลตัวอย่างในตาราง publishers
+INSERT INTO publishers (publisher_name) VALUES
+('Bloomsbury'),
+('Secker & Warburg'),
+('Kodansha');
+
+-- เพิ่มข้อมูลตัวอย่างในตาราง books
+INSERT INTO books (title, price, genre, published, publisher_id, author_id) VALUES
+('Harry Potter and the Philosopher Stone', 19.99, 'Fantasy', '1997-06-26', 1, 1),
+('1984', 15.50, 'Dystopian', '1949-06-08', 2, 2),
+('Norwegian Wood', 12.75, 'Romance', '1987-09-04', 3, 3),
+('Animal Farm', 10.25, 'Political Satire', '1945-08-17', 2, 2),
+('Kafka on the Shore', 13.50, 'Magical Realism', '2002-09-12', 3, 3),
+('Harry Potter and the Chamber of Secrets', 18.99, 'Fantasy', '1998-07-02', 1, 1),
+('1Q84', 20.99, 'Science Fiction', '2009-05-29', 3, 3),
+('Harry Potter and the Prisoner of Azkaban', 20.50, 'Fantasy', '1999-07-08', 1, 1),
+('Down and Out in Paris and London', 14.75, 'Memoir', '1933-01-09', 2, 2),
+('Dance Dance Dance', 16.25, 'Mystery', '1988-10-18', 3, 3),
+('The Wind-Up Bird Chronicle', 18.50, 'Magical Realism', '1994-04-12', 3, 3),
+('The Casual Vacancy', 21.00, 'Drama', '2012-09-27', 1, 1),
+('Brave New World', 16.99, 'Dystopian', '1932-08-30', 2, 2),
+('Sputnik Sweetheart', 14.50, 'Romance', '1999-04-15', 3, 3),
+('The Testaments', 22.50, 'Dystopian', '2019-09-10', 2, 2),
+('Lord of the Rings', 25.99, 'Fantasy', '1954-07-29', 1, 1),
+('The Hobbit', 18.75, 'Fantasy', '1937-09-21', 1, 1),
+('Fahrenheit 451', 17.25, 'Dystopian', '1953-10-19', 2, 2),
+('The Great Gatsby', 14.00, 'Drama', '1925-04-10', 2, 2),
+('Hard-Boiled Wonderland and the End of the World', 19.50, 'Magical Realism', '1985-10-01', 3, 3);
